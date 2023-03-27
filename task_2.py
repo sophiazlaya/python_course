@@ -1,16 +1,20 @@
-import json
+import unittest
+import random
 
-with open('RomeoAndJuliet.json', 'r', encoding='UTF-8') as d:
-    data = json.load(d)
-info = []
-for act in data["acts"]:
-    for scene in act["scenes"]:
-        chars = []
-        for action in scene["action"]:
-            chars.append(action["character"])
-        info.append(list(set(chars)))
 
-with open('file.json', 'w') as d:
-    for line in info:
-        d.write(json.dumps(line, ensure_ascii=False, separators=(',', ':')))
-        d.write("\n")
+
+class TestRands(unittest.TestCase):
+
+    def test_rands(self):
+        n = 10
+        numbers = []
+        for x in range(n):
+            numbers.append(random.random())
+
+        for number in numbers:
+            with self.subTest(rand=number):
+                self.assertGreaterEqual(number, 0.5)
+
+
+if __name__ == '__main__':
+    unittest.main()
