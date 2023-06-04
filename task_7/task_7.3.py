@@ -1,23 +1,28 @@
 import os
-import shutil
 import unittest
+import shutil
+
+text = "hello my soulmate"
 
 
-class TestDirectory(unittest.TestCase):
+def func(path):
+    os.makedirs(path, exist_ok=True)
+    with open('new_file.txt', 'w') as f:
+        f.write(text)
+
+
+class Test(unittest.TestCase):
+
     def setUp(self):
-        self.dir_path = '/path/to/new/folder'
-        os.makedirs(self.dir_path)
-        with open(self.dir_path+'/test.txt', 'w') as f:
-            f.write('This is a test file')
+        func('C:/Users/Sonya/python_course/new_folder')
 
-    def test_file_contents(self):
-        with open(self.dir_path+'/test.txt', 'r') as f:
-            contents = f.read()
-            self.assertNotEqual(contents, '')
-            self.assertIn('test', contents)
+    def testmethod(self):
+        with open('new_file.txt', 'r') as f:
+            self.assertFalse(os.stat('new_file.txt').st_size == 0)
+            self.assertTrue(text == f.read())
 
     def tearDown(self):
-        shutil.rmtree(self.dir_path)
+        shutil.rmtree('C:/Users/Sonya/python_course/new_folder')
 
 
 if __name__ == '__main__':

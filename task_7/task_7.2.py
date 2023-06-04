@@ -3,9 +3,9 @@ import random
 
 
 
-class TestRands(unittest.TestCase):
+class TestRandss(unittest.TestCase):
 
-    def test_rands(self):
+    def test_randss(self):
         n = 10
         numbers = []
         for x in range(n):
